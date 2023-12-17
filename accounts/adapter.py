@@ -12,6 +12,9 @@ from .models import EmailVerify
 
 class CustomAccountAdapter(DefaultAccountAdapter):
     def send_mail(self, template_prefix, email, context):
+        if 'password_reset_url' in context:
+            return super().send_mail(template_prefix, email, context)
+
         user = context.get('user', None)
         if not user:
             return 0
