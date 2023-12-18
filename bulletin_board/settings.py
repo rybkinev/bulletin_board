@@ -174,9 +174,11 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_DEFAULT_FROM')
 
-CKEDITOR_UPLOAD_PATH = "uploads/"  # Путь для сохранения загруженных файлов
+CKEDITOR_UPLOAD_PATH = ""
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',  # Выбор типа панели инструментов
+        'toolbar': 'full',
     },
 }
+MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_URL = 'uploads/'

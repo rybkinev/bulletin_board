@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from board.forms import BulletinForm
 from board.models import Bulletin
@@ -24,3 +24,9 @@ class BulletinCreateView(CreateView):
         post.created_by = self.request.user
 
         return super(BulletinCreateView, self).form_valid(form)
+
+
+class BulletinDetailView(DetailView):
+    model = Bulletin
+    template_name = 'bulletin_detail.html'
+    context_object_name = 'bulletin'
