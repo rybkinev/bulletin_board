@@ -8,20 +8,30 @@
             <tr>
                 <td>Дата</td>
                 <td>Автор</td>
+                <td>Категория</td>
                 <td>Заголовок</td>
-                <td>Краткое описание</td>
+                {% if user.is_authenticated %}
+                    <td></td>
+                {% endif %}
             </tr>
 
             {% for bulletin in bulletins %}
                 <tr>
                     <td>{{ bulletin.created_at|date:'d M y' }}</td>
                     <td>{{ bulletin.created_by }}</td>
+                    <td>{{ bulletin.get_category_display }}</td>
                     <td>
                         <a href='{{ bulletin.id }}'>
                             {{ bulletin.title }}
                         </a>
                     </td>
-                    <td>{{ bulletin.text }}</td>
+                    {% if user.is_authenticated and bulletin.created_by == user %}
+                        <td>
+                            <a href="{% url 'update_bulletin' bulletin.id %}">
+                                Редактировать
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

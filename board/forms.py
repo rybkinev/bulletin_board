@@ -1,7 +1,7 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 
-from board.models import Bulletin
+from board.models import Bulletin, CATEGORIES
 
 
 class BulletinForm(forms.ModelForm):
@@ -9,13 +9,13 @@ class BulletinForm(forms.ModelForm):
         label='title',
         max_length=100
     )
-    # text = forms.TextInput()
+    category = forms.ChoiceField(choices=CATEGORIES)
     text = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Bulletin
-        # fields = '__all__'
         fields = [
             'title',
+            'category',
             'text',
         ]

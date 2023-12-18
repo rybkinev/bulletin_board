@@ -1,5 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
 from board.forms import BulletinForm
 from board.models import Bulletin
@@ -14,7 +15,7 @@ class BoardView(ListView):
     # search = False
 
 
-class BulletinCreateView(CreateView):
+class BulletinCreateView(LoginRequiredMixin, CreateView):
     form_class = BulletinForm
     model = Bulletin
     template_name = 'bulletin_edit.html'
@@ -24,6 +25,18 @@ class BulletinCreateView(CreateView):
         post.created_by = self.request.user
 
         return super(BulletinCreateView, self).form_valid(form)
+
+
+class BulletinEditView(LoginRequiredMixin, UpdateView):
+    form_class = BulletinForm
+    model = Bulletin
+    template_name = 'bulletin_edit.html'
+
+    # def form_valid(self, form):
+    #     post = form.save(commit=False)
+    #     post.created_by = self.request.user
+    #
+    #     return super(BulletinEditView, self).form_valid(form)
 
 
 class BulletinDetailView(DetailView):
