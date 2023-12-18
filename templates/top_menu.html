@@ -18,13 +18,13 @@
 {#                    </a>#}
 {#                </li>#}
 {#                {% if perms.posts.add_post %}#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="/news/create/">Create news#}
-{#                           {% if request.path == '/news/create/' %}#}
-{#                               <span class="sr-only">(current)</span>#}
-{#                           {% endif %}#}
-{#                        </a>#}
-{#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'create_bulletin' %}>Create news
+                           {% if request.path == '/create' %}
+                               <span class="sr-only">(current)</span>
+                           {% endif %}
+                        </a>
+                    </li>
 {#                    <li class="nav-item">#}
 {#                       <a class="nav-link" href="/article/create/">Create article#}
 {#                           {% if request.path == '/article/create/' %}#}

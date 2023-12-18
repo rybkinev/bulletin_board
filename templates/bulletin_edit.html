@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+
+{% block content %}
+    {% if request.path == '/create' %}
+        <h1>Создание объявления</h1>
+    {% else %}
+        <h1>Редактирование объявления</h1>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.media }}
+        <input type="submit" value="Save" />
+    </form>
+
+{% endblock %}

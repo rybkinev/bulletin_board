@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+
+{% block content %}
+    <h1>Bulletin Board</h1>
+
+    {% if bulletins %}
+        <table>
+            <tr>
+                <td>Дата</td>
+                <td>Автор</td>
+                <td>Заголовок</td>
+                <td>Краткое описание</td>
+            </tr>
+
+            {% for bulletin in bulletins %}
+                <tr>
+                    <td>{{ bulletin.created_at }}</td>
+                    <td>{{ bulletin.created_by }}</td>
+                    <td>{{ bulletin.title }}</td>
+                    <td>{{ bulletin.text }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Объявления пока не добавлены. Вы можете быть первым!</h2>
+    {% endif %}
+{% endblock %}

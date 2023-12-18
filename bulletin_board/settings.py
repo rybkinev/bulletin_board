@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'ckeditor',
     'accounts',
     'board',
 ]
@@ -130,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = ''
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
@@ -171,3 +173,10 @@ EMAIL_USE_SSL = 'ssl' in os.environ.get('EMAIL_TLS_SSL', '').lower()
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_DEFAULT_FROM')
+
+CKEDITOR_UPLOAD_PATH = "uploads/"  # Путь для сохранения загруженных файлов
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',  # Выбор типа панели инструментов
+    },
+}
