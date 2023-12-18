@@ -16,7 +16,11 @@
                 <tr>
                     <td>{{ bulletin.created_at }}</td>
                     <td>{{ bulletin.created_by }}</td>
-                    <td>{{ bulletin.title }}</td>
+                    <td>
+                        <a href="">
+                            {{ bulletin.title }}
+                        </a>
+                    </td>
                     <td>{{ bulletin.text }}</td>
                 </tr>
             {% endfor %}

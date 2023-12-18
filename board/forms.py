@@ -1,4 +1,4 @@
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 
 from board.models import Bulletin
@@ -10,7 +10,7 @@ class BulletinForm(forms.ModelForm):
         max_length=100
     )
     # text = forms.TextInput()
-    text = RichTextField(config_name='multi_image_config')
+    text = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Bulletin
