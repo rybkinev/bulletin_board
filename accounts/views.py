@@ -12,10 +12,10 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import TemplateView, ListView
 
-from board.models import Response, Ad
+from board.models import Response, Ad, CATEGORIES
 from .filters import AdFilter
 from .forms import ConfirmEmailForm
-from .models import EmailVerify
+from .models import EmailVerify, Subscription
 
 
 class ConfirmEmail(TemplateView):
@@ -148,3 +148,32 @@ def delete_response(request, pk):
     # msg.send()
 
     return redirect('user_profile', request.user.username)
+
+
+@login_required
+@csrf_protect
+def subscriptions(request):
+    if request.method == 'POST':
+        category = request.POST.get('category')
+        action = request.POST.get('action')
+
+        if action == 'subscribe':
+            Subscription.objects.create(user=request.user, category=category)
+        elif action == 'unsubscribe':
+            Subscription.objects.filter(
+                user=request.user,
+                category=category,
+            ).delete()
+
+    categories_with_subscriptions = []
+    for i in CATEGORIES:
+        user_subscribed = Subscription.objects.filter(
+                    user=request.user,
+                    category=i[0],
+                ).exists()
+        categories_with_subscriptions.append((i[0], i[1], user_subscribed))
+    return render(
+        request,
+        'account/subscriptions.html',
+        {'categories': categories_with_subscriptions},
+    )

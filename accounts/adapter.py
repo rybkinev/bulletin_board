@@ -29,7 +29,9 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         #     email=email,
         #     primary=True,
         # )
-        message = f"Ваш код подтверждения: {numeric_code}"
+        message = (f"Ваш код подтверждения: {numeric_code}"
+                   'Код действителен в течении 5 минут.'
+                   )
         send_mail('Код подтверждения', message, 'from@example.com', [email])
         return numeric_code
 

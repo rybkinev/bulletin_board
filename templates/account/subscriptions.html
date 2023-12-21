@@ -1,0 +1,22 @@
+{% extends 'default.html' %}
+
+{% block content %}
+    <h1>Subscriptions</h1>
+    {% for category in categories  %}
+        <p>
+            {{ category.1 }}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="category" value="{{ category.0 }}" />
+
+                {% if category.2 %}
+                    <button disabled>Подписаться</button>
+                    <button name="action" value="unsubscribe">Отписаться</button>
+                {% else %}
+                    <button name="action" value="subscribe">Подписаться</button>
+                    <button disabled>Отписаться</button>
+                {% endif %}
+            </form>
+        </p>
+    {% endfor %}
+{% endblock content %}

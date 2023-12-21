@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'accounts',
     'board',
     'django_filters',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
