@@ -1,10 +1,10 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 
-from board.models import Bulletin, CATEGORIES
+from board.models import Ad, CATEGORIES, Response
 
 
-class BulletinForm(forms.ModelForm):
+class AdForm(forms.ModelForm):
     title = forms.CharField(
         label='title',
         max_length=100
@@ -13,9 +13,18 @@ class BulletinForm(forms.ModelForm):
     text = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
-        model = Bulletin
+        model = Ad
         fields = [
             'title',
             'category',
+            'text',
+        ]
+
+
+class ResponseForm(forms.ModelForm):
+
+    class Meta:
+        model = Response
+        fields = [
             'text',
         ]

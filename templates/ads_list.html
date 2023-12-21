@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Bulletin Board</h1>
 
-    {% if bulletins %}
+    {% if ads %}
         <table>
             <tr>
                 <td>Дата</td>
@@ -15,19 +15,19 @@
                 {% endif %}
             </tr>
 
-            {% for bulletin in bulletins %}
+            {% for ad in ads %}
                 <tr>
-                    <td>{{ bulletin.created_at|date:'d M y' }}</td>
-                    <td>{{ bulletin.created_by }}</td>
-                    <td>{{ bulletin.get_category_display }}</td>
+                    <td>{{ ad.created_at|date:'d M y' }}</td>
+                    <td>{{ ad.created_by }}</td>
+                    <td>{{ ad.get_category_display }}</td>
                     <td>
-                        <a href='{{ bulletin.id }}'>
-                            {{ bulletin.title }}
+                        <a href='{{ ad.id }}'>
+                            {{ ad.title }}
                         </a>
                     </td>
-                    {% if user.is_authenticated and bulletin.created_by == user %}
+                    {% if user.is_authenticated and ad.created_by == user %}
                         <td>
-                            <a href="{% url 'update_bulletin' bulletin.id %}">
+                            <a href="{% url 'update_ad' ad.id %}">
                                 Редактировать
                             </a>
                         </td>

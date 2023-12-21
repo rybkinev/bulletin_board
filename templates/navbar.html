@@ -5,6 +5,7 @@
       <a href="#" class="dropbtn">{{ user }}</a>
       <div class="dropdown-content">
 {#        <a href="{% url 'subscriptions' %}">Мои подписки</a>#}
+          <a href="{% url 'user_profile' user %}">Личный кабинет</a>
         <a href="{% url 'account_logout' %}">Выйти</a>
       </div>
     </li>

@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from board.models import Bulletin
+from board.models import Ad
 
 
-class BulletinAdmin(admin.ModelAdmin):
+class AdAdmin(admin.ModelAdmin):
     list_display = ('created_at', 'created_by', 'title', 'category')
     list_filter = ('created_at', 'created_by', 'title', 'category')
     search_fields = ('title',)
 
 
-admin.site.register(Bulletin, BulletinAdmin)
+admin.site.register(Ad, AdAdmin)

@@ -17,16 +17,15 @@ CATEGORIES = [
 ]
 
 
-class Bulletin(models.Model):
+class Ad(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='bulletin',
+        related_name='ads',
         null=True,
     )
     title = models.CharField(max_length=100, default='')
-    # text = models.TextField(default='')
     text = RichTextUploadingField()
     category = models.CharField(
         max_length=10,
@@ -34,10 +33,22 @@ class Bulletin(models.Model):
         default='1'
     )
 
-    @property
-    def category_display(self):
-        return self.get_category_display()
-
     def get_absolute_url(self):
-        return reverse('home')
-        # return reverse('/', args=[str(self.id)])
+        return reverse('ad_detail', args=[str(self.id)])
+
+
+class Response(models.Model):
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='cb_response',
+        null=True,
+    )
+    ad = models.ForeignKey(
+        Ad,
+        on_delete=models.CASCADE,
+        default=None,
+        related_name='ad_responses'
+    )
+    accept = models.BooleanField(default=False)
+    text = models.TextField(default='')

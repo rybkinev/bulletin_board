@@ -1,0 +1,57 @@
+{% extends 'default.html' %}
+
+{% block content %}
+    <h1>Страница пользователя</h1>
+    <h1>Мои объявления</h1>
+    <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+    </form>
+    <ul>
+        {% for ad in user_ads %}
+            <li>
+                <a href="/{{ ad.id }}">
+                    {{ ad.title }}
+                </a>
+                {% if ad.ad_responses %}
+                    <table>
+                        {% for response in ad.ad_responses.all %}
+                        <tr>
+                            <td>{{ response.text }}</td>
+                            <td>
+                                {% if not response.accept %}
+                                    <a href="{% url 'accept_response' response.id %}">Принять</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'delete_response' response.id %}">Удалить</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h1>Мои отклики</h1>
+    <table>
+        <tr>
+            <td>Объявление</td>
+            <td>Отклик</td>
+        </tr>
+        {% for response in user_responses %}
+            <tr>
+                <td>
+                    <a href="/{{ response.ad.id }}">
+                        {{ response.ad.title }}
+                    </a>
+                </td>
+                <td>
+                    {{ response.text }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

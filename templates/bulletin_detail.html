@@ -1,8 +1,0 @@
-{% extends 'default.html' %}
-
-{% block content %}
-    <h1>{{ bulletin.title }}</h1>
-    <h5>Дата написания: {{ bulletin.created_at|date:'d M y' }}</h5>
-{#    <h6>Дата изменения: {{ post.update_at|date:'d M y' }}</h6>#}
-    {{ bulletin.text|safe }}
-{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+
+{% block content %}
+    <h1>{{ ad.title }}</h1>
+    <h5>Дата написания: {{ ad.created_at|date:'d M y' }}</h5>
+{#    <h6>Дата изменения: {{ post.update_at|date:'d M y' }}</h6>#}
+    {{ ad.text|safe }}
+
+    <h4>Оставить отклик:</h4>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ response_form.as_p }}
+            <button type="submit">Добавить отклик</button>
+        </form>
+    {% else %}
+        <h6>Чтобы оставить отклик, Вам необходимо авторизоваться</h6>
+    {% endif %}
+{% endblock %}
